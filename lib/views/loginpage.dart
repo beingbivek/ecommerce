@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:location/location.dart';
 
 class LoginPage extends StatelessWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -7,6 +8,9 @@ class LoginPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final formkey = GlobalKey<FormState>();
     var user, pass;
+
+    Location 
+
     return Scaffold(
       backgroundColor: Colors.white,
       body: SafeArea(
