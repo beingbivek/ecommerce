@@ -8,10 +8,12 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        elevation: 0,
         actions: [],
         title: Text(data),
         leading: IconButton(
-          icon: Icon(Icons.arrow_back_ios_outlined),
+          icon: Icon(Icons.menu_rounded),
           onPressed: () {
             Navigator.of(context).pushNamed('/', arguments: '');
           },
