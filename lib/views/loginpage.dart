@@ -9,8 +9,6 @@ class LoginPage extends StatelessWidget {
     final formkey = GlobalKey<FormState>();
     var user, pass;
 
-    Location 
-
     return Scaffold(
       backgroundColor: Colors.white,
       body: SafeArea(
