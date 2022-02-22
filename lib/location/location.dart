@@ -1,3 +1,5 @@
+import 'package:ecommerce/constant/constant.dart';
+import 'package:ecommerce/service/networking.dart';
 import 'package:location/location.dart';
 
 Location location = new Location();
@@ -24,6 +26,18 @@ Future<PermissionStatus> getPermissionStatus() async {
   return _permissionGranted;
 }
 
-Future<LocationData>? getLocationData() async {
-  return await location.getLocation();
+// Future<LocationData> getLocationData() async {
+//   return await location.getLocation();
+// }
+
+Future<dynamic> getCityName() async {
+  try {
+    var locator = await location.getLocation();
+    NetworkHelper networkHelper = NetworkHelper(
+        '$openWeatherMapURL?lat=${locator.latitude}&lon=${locator.longitude}&appid=$apiKey&units=metric');
+    dynamic cityDetails = await networkHelper.getData();
+    return cityDetails['name'];
+  } catch (e) {
+    return 'No Internet and problem is' + '$e';
+  }
 }

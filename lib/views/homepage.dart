@@ -11,7 +11,15 @@ class HomePage extends StatelessWidget {
         backgroundColor: Colors.transparent,
         elevation: 0,
         actions: [],
-        title: Text(data),
+        title: Row(
+          children: [
+            Icon(
+              Icons.location_on,
+              color: Colors.black,
+            ),
+            Text(data),
+          ],
+        ),
         leading: IconButton(
           icon: Icon(Icons.menu_rounded),
           onPressed: () {
