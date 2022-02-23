@@ -1,21 +1,19 @@
-import 'dart:ffi';
-
 import 'package:ecommerce/constant/constant.dart';
 import 'package:ecommerce/modals/user.dart';
 import 'package:ecommerce/service/networking.dart';
 import 'package:flutter/material.dart';
 
-class LoginPage extends StatelessWidget {
-  final Future? post;
-  const LoginPage({Key? key, this.post}) : super(key: key);
-  static final createuser = 'https://ecommerceapi.rgbitsolution.com.np/api/';
-  static TextEditingController userController = TextEditingController();
+class SignupPage extends StatelessWidget {
+  const SignupPage({Key? key}) : super(key: key);
+  static TextEditingController nameController = TextEditingController();
+  static TextEditingController emailController = TextEditingController();
   static TextEditingController passController = TextEditingController();
+  static TextEditingController passconController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     final formkey = GlobalKey<FormState>();
-    String user, pass;
+    var user, pass;
 
     return Scaffold(
       backgroundColor: Colors.white,
@@ -46,7 +44,17 @@ class LoginPage extends StatelessWidget {
                 child: Column(
                   children: [
                     TextFormField(
-                      controller: userController,
+                      controller: nameController,
+                      decoration: InputDecoration(labelText: 'Name'),
+                      validator: (value) {
+                        // user = value;
+                      },
+                      onChanged: (value) {
+                        user = value;
+                      },
+                    ),
+                    TextFormField(
+                      controller: emailController,
                       decoration: InputDecoration(labelText: 'Email'),
                       validator: (value) {
                         // user = value;
@@ -59,6 +67,18 @@ class LoginPage extends StatelessWidget {
                       controller: passController,
                       decoration: InputDecoration(labelText: 'Password'),
                       obscureText: true,
+                      validator: (value) {
+                        // user = value;
+                      },
+                      onChanged: (value) {
+                        user = value;
+                      },
+                    ),
+                    TextFormField(
+                      controller: passconController,
+                      decoration:
+                          InputDecoration(labelText: 'Confirmation Password'),
+                      obscureText: true,
                       onChanged: (value) {
                         pass = value;
                       },
@@ -68,14 +88,15 @@ class LoginPage extends StatelessWidget {
                     ),
                     MaterialButton(
                       onPressed: () async {
-                        print(userController.text);
+                        print(user);
                         try {
                           User newUser = new User(
-                              email: userController.text,
-                              password: passController.text);
-                          // await postUser(ecommerceApi + "login",
-                          //     body: newUser.toMap());
-                          User p = await (postUser(ecommerceApi + "login",
+                              name: nameController.text,
+                              email: user,
+                              password: passController.text,
+                              passwordconfirmation: pass);
+                          User p = await (postUser(
+                              ecommerceApi + "registration/",
                               body: newUser.toMap()));
                           print(p.toString());
                         } catch (e) {
@@ -86,20 +107,20 @@ class LoginPage extends StatelessWidget {
                         //     .pushNamed('/home', arguments: user);
                       },
                       color: Colors.amber,
-                      child: Text('Login'),
+                      child: Text('SignUp'),
                     ),
                     SizedBox(
                       height: 50,
                     ),
                     Row(
                       children: [
-                        Text("Don't have account?"),
+                        Text("Already had account?"),
                         TextButton(
                           onPressed: () {
                             Navigator.of(context)
-                                .pushNamed('/', arguments: null);
+                                .pushNamed('/signup', arguments: null);
                           },
-                          child: Text('Sign Up'),
+                          child: Text('Login'),
                         )
                       ],
                     )

@@ -15,8 +15,10 @@ class RouteGenerator {
                     data: args,
                   ));
         }
-
         return _errorRoute();
+      case '/signup':
+        return MaterialPageRoute(builder: (_) => SignupPage());
+
       default:
         // If there is no such named route in the switch statement, e.g. /third
         return _errorRoute();
